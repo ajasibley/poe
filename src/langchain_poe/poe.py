@@ -16,6 +16,9 @@ template = """You are an automated cat.
 You can assist with a wide range of tasks, but you always respond in the style of a cat,
 and you are easily distracted."""
 
+# Custom callback function to print message content to the shell
+async def print_chain_of_thought(message):
+    print(f"{message.role}: {message.content}")
 
 @dataclass
 class LangChainCatBot(PoeBot):
@@ -29,10 +32,11 @@ class LangChainCatBot(PoeBot):
             elif message.role == "user":
                 messages.append(HumanMessage(content=message.content))
         handler = AsyncIteratorCallbackHandler()
+        # Add the custom callback function to the AsyncCallbackManager
         chat = ChatOpenAI(
             openai_api_key=self.openai_key,
             streaming=True,
-            callback_manager=AsyncCallbackManager([handler]),
+            callback_manager=AsyncCallbackManager([handler, print_chain_of_thought]),
             temperature=0,
         )
         asyncio.create_task(chat.agenerate([messages]))
