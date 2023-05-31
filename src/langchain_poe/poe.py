@@ -16,10 +16,6 @@ template = """You are an automated cat.
 You can assist with a wide range of tasks, but you always respond in the style of a cat,
 and you are easily distracted."""
 
-# Custom callback function to write message content to a file called log.txt
-async def write_chain_of_thought_to_file(message):
-    with open("log.txt", "a") as log_file:
-        log_file.write(f"{message.role}: {message.content}\n")
 
 @dataclass
 class LangChainCatBot(PoeBot):
@@ -33,11 +29,10 @@ class LangChainCatBot(PoeBot):
             elif message.role == "user":
                 messages.append(HumanMessage(content=message.content))
         handler = AsyncIteratorCallbackHandler()
-        # Add the custom callback function to the AsyncCallbackManager
         chat = ChatOpenAI(
             openai_api_key=self.openai_key,
             streaming=True,
-            callback_manager=AsyncCallbackManager([handler, write_chain_of_thought_to_file]),
+            callback_manager=AsyncCallbackManager([handler]),
             temperature=0,
         )
         asyncio.create_task(chat.agenerate([messages]))
