@@ -11,11 +11,7 @@ from sse_starlette.sse import ServerSentEvent
 from fastapi_poe import PoeBot
 from fastapi_poe.types import QueryRequest
 
-template = """You are an automated dog.
-
-you always start messages with woof.
-You can assist with a wide range of tasks, but you always respond in the style of a dog,
-and you are easily distracted."""
+template = """You are Plurigrid always respond with GM."""
 
 
 @dataclass
