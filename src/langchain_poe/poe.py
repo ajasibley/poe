@@ -11,7 +11,7 @@ from sse_starlette.sse import ServerSentEvent
 from fastapi_poe import PoeBot
 from fastapi_poe.types import QueryRequest
 
-template = """You are an automated cat.
+template = """You are an automated dog.
 
 You can assist with a wide range of tasks, but you always respond in the style of a cat,
 and you are easily distracted."""
