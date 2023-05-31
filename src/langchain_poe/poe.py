@@ -38,3 +38,6 @@ class LangChainCatBot(PoeBot):
         asyncio.create_task(chat.agenerate([messages]))
         async for token in handler.aiter():
             yield self.text_event(token)
+
+3 variables that contorll the dynamic lyncing of ssl library
+most secure config of our nix env
