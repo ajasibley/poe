@@ -14,7 +14,6 @@ pkgs.mkShell {
     ipfs
     babashka
     ngrok
-    openssl_1_1
   ];
   shellHook = ''
     cat <<'EOF'

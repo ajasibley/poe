@@ -1,0 +1,95 @@
+tree =
+  Node "Plurigrid Protocol Deployment"
+    (Map.fromList [
+      ("Cosmonic", Node "Cosmonic" (Map.fromList [
+        ("Description", Description "Cosmonic provides infrastructure for deploying and managing wasmCloud hosts at scale. This could enable running Plurigrid software on anything from laptops and smartphones to computer clusters, NVIDIA Jetsons and Raspberry Pi's. The Cosmonic dashboard also gives visibility into metrics to monitor the system.")
+        ])),
+      ("wasmCloud", Node "wasmCloud" (Map.fromList [
+        ("Description", Description "wasmCloud is a runtime for executing WebAssembly actors, which Plurigrid could leverage for its node software. wasmCloud's actor model suits the interactions between entities in an energy grid, and it provides built-in service discovery, health checks, and lifecycle management.")
+        ])),
+      ("NATS", Node "NATS" (Map.fromList [
+        ("Description", Description "NATS is a messaging system that could be used for communication between Plurigrid nodes. It supports patterns like publish-subscribe, request-reply and queueing which cover various messaging needs. NATS is also designed to be scalable, secure and resilient.")
+        ])),
+      ("Unison", Node "Unison" (Map.fromList [
+        ("Description", Description "Unison is a functional programming language focused on distributed computing, which may be suitable for implementing Plurigrid's software. Unison's content-addressed code and immutable data structures fit building a robust decentralized system. Unison aims to simplify distributed programming by allowing computations to move between locations.")
+        ])),
+      ("CRDTs", Node "CRDTs" (Map.fromList [
+        ("Description", Description "Conflict-free Replicated Data Types (CRDTs) are data structures that can be replicated across devices and merged without conflict. CRDTs ensure nodes have a consistent view of the system even with temporary network partitions. They could help address challenges around managing a decentralized energy grid at scale.")
+        ])),
+      ("Y-WebRTC", Node "Y-WebRTC" (Map.fromList [
+        ("Description", Description "Y-WebRTC enables peer-to-peer data sharing and messaging between browsers with end-to-end encryption. This could allow Plurigrid to run partly in users' web browsers, facilitating a participatory model where people contribute resources and benefit collectively. But WebRTC also has limitations around connectivity that would need consideration.")
+        ])),
+      ("Refined Tasks", TaskList (Set.fromList [
+        Task { taskId = "1", taskName = "Design a MagSafe battery with a Raspberry Pi Zero, including schematics", taskDescription = "Design a MagSafe battery with a Raspberry Pi Zero, including schematics.", taskStatus = "Not started" },
+        Task { taskId = "2", taskName = "Set up LlamaIndex Chat Engine and index DAO of FP and Unison docs", taskDescription = "Set up LlamaIndex Chat Engine and index DAO of functional programming and all Unison documentation into the database.", taskStatus = "Not started" },
+        Task { taskId = "3", taskName = "Complete Unison tutorials", taskDescription = "Complete remaining Unison tutorials to gain a better understanding of the language and its features. Explore how Unison can be integrated into Plurigrid's architecture for distributed computing.", taskStatus = "In progress" },
+        Task { taskId = "4", taskName = "Study Vespa for Plurigrid Data Management", taskDescription = "Study Vespa, an open-source big data serving engine. Explore how Vespa could be used to optimize the management and querying of data within the Plurigrid system.", taskStatus = "In progress" },
+        Task { taskId = "5", taskName = "Familiarize with Babashka and rewrite Cosmonic scripts", taskDescription = "Familiarize yourself with Babashka, a Clojure scripting tool. Rewrite existing Cosmonic scripts using Babashka for better performance and maintainability in the Plurigrid system.", taskStatus = "Not started" },
+        Task { taskId = "6", taskName = "Research distributed actor systems for Plurigrid", taskDescription = "Research distributed actor systems and their potential for running across multiple devices. Identify specific use cases within Plurigrid that can benefit from distributed actor systems and plan their implementation.", taskStatus = "Not started" },
+        Task { taskId = "7", taskName = "Design a system for unique energy signatures and maintain an index for AI models", taskDescription = "Design a system for unique energy signatures and maintain an index for every open-source AI model. This will help in identifying and managing the energy consumption of different AI models within the system.", taskStatus = "Not started" },
+        Task { taskId = "8", taskName = "Perform deeper technology analysis for Plurigrid", taskDescription = "Perform a deeper analysis of the trade-offs and limitations for each technology in the Plurigrid protocol. Identify the most suitable options based on ecosystem compatibility, security, extensibility, and other critical factors.", taskStatus = "Not started" },
+        Task { taskId = "9", taskName = "Develop Plurigrid system design and integration plan", taskDescription = "Develop a concrete system design for the Plurigrid protocol, detailing how various components integrate together to form a cohesive solution. Include energy-specific considerations, data structures, messaging protocols, and other domain-specific optimizations.", taskStatus = "Not started" }
+        ]))
+    ])
+Node "Resources"
+    (Map.fromList [
+      ("ML Models", Node "ML Models" (Map.fromList [
+        ("falcon-40b", Description "The Falcon-40B model is a large-scale, open-source AI model with 40 billion parameters developed by the Technology Innovation Institute."),
+        ("WizardLM-13B-1.0", Description "The WizardLM-13B-1.0 model generates helpful, detailed, and polite answers in the context of a chat between a user and an AI assistant."),
+        ("Vicuna-13B", Description "The Vicuna-13B model is an open-source chatbot trained by fine-tuning LLaMA on user-shared conversations from ShareGPT."),
+        ("guanaco-65B", Description "The guanaco-65B model is a text generation model available on Hugging Face in various quantized versions for GPU and CPU inference."),
+        ("Meta-ICL", Description "The Meta-ICL model is a meta-training framework for few-shot learning where a pretrained language model is tuned to do in-context learning on a large set of training tasks."),
+        ("MPT-7B", Description "The MPT-7B model is an open-source model released by MosaicML to provide a commercially-usable model matching the quality of LLaMA-7B.")
+        ])),
+      ("Research Papers", Node "Research Papers" (Map.fromList [
+        ("Passive learning of active causal strategies", Description "This research paper presents optimal experimental design strategies for calculating optimal interventions for two different learning goals, which significantly outperform an existing approach. (http://arxiv.org/abs/2110.14049)")
+        ]))
+    ])
+
+graph TD
+    A[Plurigrid Protocol Deployment]
+    B[Cosmonic]
+    C[wasmCloud]
+    D[NATS]
+    E[Unison]
+    F[CRDTs]
+    G[Y-WebRTC]
+    H[Refined Tasks]
+    I[Resources]
+    J[ML Models]
+    K[Research Papers]
+    A --> B
+    A --> C
+    A --> D
+    A --> E
+    A --> F
+    A --> G
+    A --> H
+    I --> J
+    I --> K
+
+    H1[Design a MagSafe battery with a Raspberry Pi Zero, including schematics]
+    H2[Set up LlamaIndex Chat Engine and index DAO of FP and Unison docs]
+    H3[Complete Unison tutorials]
+    H4[Study Vespa for Plurigrid Data Management]
+    H5[Familiarize with Babashka and rewrite Cosmonic scripts]
+    H6[Research distributed actor systems for Plurigrid]
+    H7[Design a system for unique energy signatures and maintain an index for AI models]
+    H8[Perform deeper technology analysis for Plurigrid]
+    H9[Develop Plurigrid system design and integration plan]
+
+    H --> H1
+    H1 --> H2
+    H2 --> H3
+    H3 --> H4
+    H4 --> H5
+    H5 --> H6
+    H6 --> H7
+    H7 --> H8
+    H8 --> H9
+
+    K1[Passive learning of active causal strategies]
+    K2[Another Research Paper]
+
+    K --> K1
+    K1 --> K2
