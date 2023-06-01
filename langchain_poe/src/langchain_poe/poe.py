@@ -23,8 +23,10 @@ class LangChainCatBot(PoeBot):
         for message in query.query:
             if message.role == "bot":
                 messages.append(AIMessage(content=message.content))
+                print(f"AI: {message.content}")
             elif message.role == "user":
                 messages.append(HumanMessage(content=message.content))
+                print(f"Human: {message.content}")
         handler = AsyncIteratorCallbackHandler()
         chat = ChatOpenAI(
             openai_api_key=self.openai_key,
