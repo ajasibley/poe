@@ -1,15 +1,28 @@
 [tool.poetry]
-name = "poe"
-version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
+name = "langchain_poe"
+version = "0.0.13"
+description = "A demonstration of a Poe bot built using LangChain"
+authors = ["Jelle Zijlstra <jelle@quora.com>"]
 readme = "README.md"
+homepage = "https://github.com/quora/poe-protocol"
+license = "Apache-2.0"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+]
 
 [tool.poetry.dependencies]
-python = "^3.10"
-uvicorn = "^0.22.0"
+python = ">=3.7"
+fastapi_poe = "*"
+langchain = "*"
+openai = "*"
 
+[tool.poetry.dev-dependencies]
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pyright]
+pythonVersion = "3.7"
