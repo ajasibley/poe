@@ -7,7 +7,7 @@ authors = ["Your Name <you@example.com>"]
 [tool.poetry.dependencies]
 python = ">=3.7"
 fastapi_poe = "*"
-langchain = "*"
+langchain = ">=0.0.188"
 openai = "*"
 certifi = "*"
 
