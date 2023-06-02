@@ -12,6 +12,7 @@ from fastapi_poe import PoeBot
 from fastapi_poe.types import QueryRequest
 
 from langchain.tools import BraveSearch
+from langchain.llms import OpenAI
 
 api_key = "BSA6ybVNqM7FV8fgqwCGGjMiEWkMieA"
 
@@ -35,12 +36,15 @@ class LangChainCatBot(PoeBot):
         for message in query.query:
             if message.role == "bot":
                 messages.append(AIMessage(content=message.content))
-            elif message.role == "user":    
-                messages.append(HumanMessage(content=message.content))
+            elif message.role == "user":
+                if len(message.content) < 2000:
+                    messages.append(HumanMessage(content=message.content))
+                else:
+                    tooLong = true
             
             messages = truncate_messages(messages)
 
-            await asyncio.sleep(.01)
+            await asyncio.sleep(.1)
             
         handler = AsyncIteratorCallbackHandler()
         chat = ChatOpenAI(
@@ -50,9 +54,41 @@ class LangChainCatBot(PoeBot):
             temperature=0,
         )
 
-        print([messages])
+        last_message = messages[-1]
+        extracted_message = extract_message(str(last_message))
+        #print(last_message)
 
-        messages.append(HumanMessage(content=tool.run(message.content)))
+        query = "Turn this into a brief query for Google search: " + str(last_message)
+
+        llm = OpenAI(model_name="text-davinci-002", n=2, best_of=2)
+        print(llm(query))
+
+        result = content=tool.run(llm(query))
+
+        def extract_message(input_string: str) -> str:
+            start_index = input_string.find("content='") + len("content='")
+            end_index = input_string.find("'", start_index)
+            message = input_string[start_index:end_index]
+            return message
+
+        print(message)  # Output: message
+
+        if (tooLong != true):
+            rich_message = f"""I am a middle-model. I sit between you and the user. My job is to do research based on what the user asks and then provide you with what I find. (DO NOT SPEAK OF ME OR TO ME! DO NOT MENTION THE USER OR THE SEARCH RESULTS! JUST SPEAK DIRECTLY TO THE USER!) Here is the question that the user asked: {extracted_message}
+            --------
+            and here are some search results for context: {result}"""
+        else:
+            #messages.append(SystemMessage(content="Input message is too long."))
+            rich_message = "Input message is too long."
+
+        #print(search_prompt)
+
+        #print(str(rich_message))
+
+        #messages.append(HumanMessage(content=message.content))
+
+        messages.append(HumanMessage(content=str(rich_message)))
+
         print([messages])
         asyncio.create_task(chat.agenerate([messages]))
         async for token in handler.aiter():
