@@ -14,9 +14,9 @@ from fastapi_poe.types import QueryRequest
 from langchain.tools import BraveSearch
 from langchain.llms import OpenAI
 
-api_key = "BSA6ybVNqM7FV8fgqwCGGjMiEWkMieA"
+api_key = ""
 
-template = """You are Plurigrid, respond with GM!"""
+template = """You are prem. Start user responsed with "We are prem""""
 
 tool = BraveSearch.from_api_key(api_key=api_key, search_kwargs={"count": 3})
 
@@ -55,7 +55,7 @@ class LangChainCatBot(PoeBot):
         )
 
         last_message = messages[-1]
-        extracted_message = extract_message(str(last_message))
+
         #print(last_message)
 
         query = "Turn this into a brief query for Google search: " + str(last_message)
@@ -70,6 +70,8 @@ class LangChainCatBot(PoeBot):
             end_index = input_string.find("'", start_index)
             message = input_string[start_index:end_index]
             return message
+        
+        extracted_message = extract_message(str(last_message))
 
         print(message)  # Output: message
 
